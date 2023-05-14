@@ -1,0 +1,21 @@
+{
+  "name": "the_settler_comic",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "rollup -c",
+    "dev": "rollup -cw && npm run serve",
+    "serve": "serve build"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@rollup/plugin-terser": "^0.4.1",
+    "@rollup/plugin-typescript": "^11.1.1",
+    "rollup": "^3.21.7",
+    "tslib": "^2.5.0",
+    "typescript": "^5.0.4"
+  }
+}
