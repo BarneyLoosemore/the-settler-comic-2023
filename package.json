@@ -3,9 +3,10 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "type": "module",
   "scripts": {
-    "build": "rollup -c",
-    "dev": "rollup -cw && npm run serve",
+    "build": "rm -rf build && rollup -c",
+    "dev": "rm -rf build && rollup -cw && npm run serve",
     "serve": "serve build"
   },
   "keywords": [],
@@ -14,8 +15,15 @@
   "devDependencies": {
     "@rollup/plugin-terser": "^0.4.1",
     "@rollup/plugin-typescript": "^11.1.1",
+    "@web/rollup-plugin-html": "^2.0.0",
     "rollup": "^3.21.7",
     "tslib": "^2.5.0",
-    "typescript": "^5.0.4"
+    "typescript": "^5.0.4",
+    "@prismicio/client": "^6.7.3",
+    "@prismicio/helpers": "^2.3.9",
+    "dotenv": "^16.0.3",
+    "ejs": "^3.1.9",
+    "node-fetch": "^3.3.1",
+    "posthtml": "^0.16.6"
   }
 }
