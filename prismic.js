@@ -28,7 +28,7 @@ const uniqIssues = pageData
   .filter((issue, i, arr) => arr.indexOf(issue) === i);
 
 export const issues = uniqIssues.map((issue) => ({
-  issueNumber: issue,
+  number: issue,
   pages: pageData
     .filter(filterByIssue(issue))
     .map(({ page_title, page_content }) => ({

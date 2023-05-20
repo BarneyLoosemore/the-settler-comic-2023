@@ -1,0 +1,7 @@
+<body>
+  <h1>Issue <% issue.number %></h1>
+  <% issue.pages.forEach(page => { %>
+  <h2><%= page.title %></h2>
+  <img src="<%= page.imageUrl %>" alt="<%= page.title %>" />
+  <% }); %>
+</body>
