@@ -2,7 +2,7 @@
   "type": "module",
   "scripts": {
     "build": "rm -rf build && rollup -c",
-    "dev": "rm -rf build && rollup -cw && npm run serve",
+    "watch": "rm -rf build && rollup -cw",
     "serve": "serve build"
   },
   "devDependencies": {

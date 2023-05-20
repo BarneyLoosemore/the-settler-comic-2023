@@ -1,7 +1,20 @@
-<body>
+<%- include('header') %>
+<main>
   <h1>Issue <% issue.number %></h1>
-  <% issue.pages.forEach(page => { %>
-  <h2><%= page.title %></h2>
-  <img src="<%= page.imageUrl %>" alt="<%= page.title %>" />
+  <% issue.pages.forEach(({ image, title }) => { %>
+  <picture>
+    <source srcset="<%= image.srcset %>" />
+    <img
+      src="<%= image.src %>"
+      alt="<%= title %>"
+      loading="<%= image.loading %>"
+      height="900"
+      width="600"
+      style="
+        background-size: cover;
+        background-image: url('<%= image.placeholder %>');
+      " />
+  </picture>
   <% }); %>
-</body>
+</main>
+<%- include('footer') %>
