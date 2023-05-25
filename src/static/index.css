@@ -1,3 +1,5 @@
+/* CSS resets */
+
 *,
 *::before,
 *::after {
@@ -36,3 +38,63 @@ h5,
 h6 {
   overflow-wrap: break-word;
 }
+
+/* Header */
+
+header {
+  background-color: black;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  margin: 4px 32px;
+  padding: 8px;
+}
+
+nav img {
+  height: 50px;
+  min-width: fit-content;
+}
+
+nav ul {
+  display: flex;
+  align-items: center;
+}
+
+nav ul li {
+  list-style: none;
+  margin: 0 32px;
+  color: white;
+  height: fit-content;
+  font-size: 2rem;
+  letter-spacing: 0.1ch;
+}
+
+nav ul li:hover {
+  cursor: pointer;
+  border-bottom: 1px solid;
+  margin-bottom: -1px;
+}
+
+/* Main */
+
+main img {
+  max-height: 100vh;
+  height: auto;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  object-fit: contain;
+}
+
+main h1 {
+  font-size: 3rem;
+  border-bottom: 1px solid;
+  letter-spacing: -1px;
+  margin: 32px auto;
+  width: fit-content;
+  font-weight: bold;
+}
+
+/* Footer */

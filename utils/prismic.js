@@ -1,7 +1,7 @@
 import fetch from "node-fetch";
 import * as prismic from "@prismicio/client";
 import * as prismicH from "@prismicio/helpers";
-import open from "open";
+import { getColor, getPalette } from "colorthief";
 
 // TODO: move this
 import * as dotenv from "dotenv";
@@ -12,10 +12,14 @@ export const client = prismic.createClient(process.env.PRISMIC_REPO_NAME, {
   accessToken: process.env.PRISMIC_ACCESS_TOKEN,
 });
 
+const getImageOrientation = (image) => {
+  const { width, height } = image.dimensions;
+  return width > height ? "landscape" : "portrait";
+};
+
 const getImageSrcSet = (image) =>
   prismicH.asImageWidthSrcSet(image, {
-    widths: [300, 600, 900],
-    q: [25, 30, 15],
+    widths: [300, 600, 1200],
     fm: "webp",
   });
 
@@ -42,19 +46,39 @@ const uniqIssues = pageData
   .map(({ issue_number }) => prismicH.asText(issue_number))
   .filter((issue, i, arr) => arr.indexOf(issue) === i);
 
-export const issues = uniqIssues.map((issue) => ({
-  number: issue,
-  pages: pageData
-    .filter(filterByIssue(issue))
-    .map(({ page_title, page_content }, i) => ({
-      title: prismicH.asText(page_title),
-      image: {
-        ...getImageSrcSet(page_content),
-        placeholder: getPlaceholderImage(page_content),
-        loading: i === 0 ? "eager" : "lazy",
-      },
-    })),
-}));
+export const issues = await Promise.all(
+  uniqIssues.map(async (issue) => {
+    const pages = pageData.filter(filterByIssue(issue));
+    const formattedPages = await Promise.all(
+      pages.map(async ({ page_title, page_content }) => ({
+        title: prismicH.asText(page_title),
+        image: {
+          ...getImageSrcSet(page_content),
+          placeholder: getPlaceholderImage(page_content),
+          orientation: getImageOrientation(page_content),
+          height: page_content.dimensions.height,
+          width: page_content.dimensions.width,
+          aspectRatio:
+            page_content.dimensions.width / page_content.dimensions.height,
+          // palette: await getColor(page_content.url),
+        },
+      }))
+    );
+
+    return {
+      number: issue,
+      pages: formattedPages,
+    };
+  })
+);
+
+export const urlsToCache = issues.flatMap(({ pages }) =>
+  pages.flatMap(({ image }) => [image.placeholder, ...image.srcset.split(",")])
+);
+
+// issues[0].pages.forEach(({ image }) => {
+//   console.log(image.palette);
+// });
 
 export const aboutPage = aboutData.map(({ content }) => ({
   description: prismicH.asHTML(content),
@@ -64,17 +88,3 @@ export const issueCovers = issueData.map(({ issue_title, issue_cover }) => ({
   cover: issue_cover.url,
   title: prismicH.asText(issue_title),
 }));
-
-// console.log(issues[0].pages[0].image.placeholder);
-
-// const imgSize = await fetch(issues[0].pages[25].image.placeholder).then((res) =>
-//   res.headers.get("content-length")
-// );
-// const imgSize2 = await fetch(issues[0].pages[10].imageUrl.src).then((res) =>
-//   res.headers.get("content-length")
-// );
-
-// console.log(`${imgSize / 1000}kb`);
-// console.log(`${imgSize2 / 1000}kb`);
-// open(issues[0].pages[25].image.placeholder);
-// open(issues[0].pages[10].imageUrl.src);
