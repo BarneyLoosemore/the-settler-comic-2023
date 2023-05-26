@@ -1,11 +1,14 @@
-<%- include('header') %>
+<%- include('_header', { preloads: [{ href: pages[0].image.placeholder, as:
+"image" }]}) %>
 <main>
-  <h1>Issue <%= issue.number %></h1>
+  <h1>Issue <%= number %></h1>
   <section>
-    <% issue.pages.forEach(({ image, title }) => { %>
+    <!--  -->
+    <% pages.forEach(({ image, title }) => { %>
     <picture>
       <source srcset="<%= image.srcset %>" />
       <img
+        id="<%= title %>"
         src="<%= image.src %>"
         alt="<%= title %>"
         loading="<%= image.loading %>"
@@ -22,4 +25,4 @@
     <p class="next">Next</p>
   </div>
 </main>
-<%- include('footer') %>
+<%- include('_footer') %>

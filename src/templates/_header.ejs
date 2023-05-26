@@ -5,11 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>The Settler</title>
     <link href="src/static/index.css" rel="stylesheet" />
-    <link
-      href="<%= issue.pages[0].image.placeholder %>"
-      rel="preload"
-      as="image" />
     <script src="src/static/index.js" defer></script>
+    <% if (preloads) { %> <% preloads.forEach(({ href, as }) => { %>
+    <link href="<%= href %>" rel="preload" as="<%= as %>" />
+    <% }); %> <% } %>
   </head>
   <header>
     <nav>
