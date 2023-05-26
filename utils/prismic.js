@@ -50,7 +50,7 @@ export const issues = await Promise.all(
   uniqIssues.map(async (issue) => {
     const pages = pageData.filter(filterByIssue(issue));
     const formattedPages = await Promise.all(
-      pages.map(async ({ page_title, page_content }) => ({
+      pages.map(async ({ page_title, page_content }, i) => ({
         title: prismicH.asText(page_title),
         image: {
           ...getImageSrcSet(page_content),
@@ -58,6 +58,7 @@ export const issues = await Promise.all(
           orientation: getImageOrientation(page_content),
           height: page_content.dimensions.height,
           width: page_content.dimensions.width,
+          loading: i === 0 ? "eager" : "lazy",
           aspectRatio:
             page_content.dimensions.width / page_content.dimensions.height,
           // palette: await getColor(page_content.url),

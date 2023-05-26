@@ -5,7 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>The Settler</title>
     <link href="src/static/index.css" rel="stylesheet" />
-    <!-- <script src="src/static/index.js" defer></script> -->
+    <link
+      href="<%= issue.pages[0].image.placeholder %>"
+      rel="preload"
+      as="image" />
+    <script src="src/static/index.js" defer></script>
   </head>
   <header>
     <nav>
@@ -21,13 +25,13 @@
       </a>
       <ul>
         <li>
-          <a> issues </a>
+          <a href="/issues"> issues </a>
         </li>
         <li>
-          <a> about </a>
+          <a href="/about"> about </a>
         </li>
         <li>
-          <a> archive </a>
+          <a href="/archive"> archive </a>
         </li>
       </ul>
     </nav>

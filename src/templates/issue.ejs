@@ -1,7 +1,6 @@
 <%- include('header') %>
 <main>
   <h1>Issue <%= issue.number %></h1>
-
   <section>
     <% issue.pages.forEach(({ image, title }) => { %>
     <picture>
@@ -12,9 +11,15 @@
         loading="<%= image.loading %>"
         height="<%= image.height %>"
         width="<%= image.width %>"
+        onload="this.style.backgroundImage = 'none';"
         style="background-image: url('<%= image.placeholder %>')" />
     </picture>
     <% }); %>
   </section>
+  <div class="controls">
+    <p class="prev">Prev</p>
+    <p class="page-number">0</p>
+    <p class="next">Next</p>
+  </div>
 </main>
 <%- include('footer') %>
