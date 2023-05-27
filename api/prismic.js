@@ -2,7 +2,12 @@ import fetch from "node-fetch";
 import * as prismic from "@prismicio/client";
 import * as prismicH from "@prismicio/helpers";
 import { getColor, getPalette } from "colorthief";
-import { filterByIssue, formatPage } from "./utils.js";
+import {
+  filterByIssue,
+  formatPage,
+  sortAsc,
+  formatIssueCover,
+} from "./utils.js";
 
 // TODO: move this
 import * as dotenv from "dotenv";
@@ -27,17 +32,17 @@ const uniqIssues = pageData
   .filter((issue, i, arr) => arr.indexOf(issue) === i);
 
 const issues = uniqIssues.map((issue) => {
-  const pages = pageData.filter(filterByIssue(issue));
-  const formattedPages = pages.map(({ page_title, page_content }, i) =>
-    formatPage({ page_title, page_content })
-  );
-
+  const pages = pageData
+    .filter(filterByIssue(issue))
+    .map(formatPage)
+    .sort(sortAsc);
   return {
-    number: issue,
-    pages: formattedPages,
+    number: Number(issue),
+    pages,
   };
 });
 
+// TODO: generalise this for SW?
 const urlsToCache = issues.flatMap(({ pages }) =>
   pages.flatMap(({ image }) => [image.placeholder, ...image.srcset.split(",")])
 );
@@ -46,9 +51,6 @@ const aboutPageDescription = aboutData.map(({ content }) => ({
   description: prismicH.asText(content),
 }))[0].description;
 
-const issueCovers = issueData.map(({ issue_title, issue_cover }) => ({
-  cover: issue_cover.url,
-  title: prismicH.asText(issue_title),
-}));
+const issueCovers = issueData.map(formatIssueCover).sort(sortAsc);
 
 export { issues, aboutPageDescription, issueCovers, urlsToCache };

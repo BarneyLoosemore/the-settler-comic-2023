@@ -1,0 +1,12 @@
+<%- include('_header', { preloads: null, prefetches: null }) %>
+<main>
+  <ul>
+    <% for (const issue of issues) { %> <% for (const page of issue.pages) { %>
+    <li>
+      <a href="/issue-<%= issue.number %>#<%= page.title %>">
+        <%= page.title %>
+      </a>
+    </li>
+    <% } %> <% } %>
+  </ul>
+</main>

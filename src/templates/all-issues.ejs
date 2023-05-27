@@ -1,0 +1,13 @@
+<%- include('_header', { preloads: null, prefetches }) %>
+<main>
+  <ul class="issues-list">
+    <% issueCovers.forEach(({ title, cover, pathname }) => { %>
+    <li>
+      <% if(pathname) { %>
+      <a href="/<%= pathname %>"><%= title %></a>
+      <% } else { %> <%= title %> <% } %>
+    </li>
+    <% }); %>
+  </ul>
+</main>
+<%- include('_footer') %>

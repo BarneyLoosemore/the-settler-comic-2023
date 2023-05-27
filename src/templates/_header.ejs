@@ -3,36 +3,51 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>The Settler</title>
+    <title><%= pageTitle %> | The Settler</title>
     <link href="src/static/index.css" rel="stylesheet" />
-    <script src="src/static/index.js" defer></script>
-    <% if (preloads) { %> <% preloads.forEach(({ href, as }) => { %>
-    <link href="<%= href %>" rel="preload" as="<%= as %>" />
+
+    <% if (preloads) { %> <% preloads.forEach(({ href, as, imagesrcset }) => {
+    %>
+    <link
+      href="<%= href %>"
+      rel="preload"
+      as="<%= as %>"
+      imagesrcset="<%= imagesrcset %>" />
     <% }); %> <% } %>
+
+    <!-- prefetching nav links -->
+    <% navLinks.forEach(({ href }) => { %>
+    <link href="<%= href %>" rel="prefetch" as="document" />
+    <% }); %>
+
+    <!-- additional prefetches -->
+    <% if (prefetches) { %> <% prefetches.forEach(({ href, as }) => { %>
+    <link href="<%= href %>" rel="prefetch" as="<%= as %>" />
+    <% }); } %>
   </head>
-  <header>
-    <nav>
-      <a href="/">
-        <picture>
-          <source srcset="src/static/the-settler-title-art.webp" />
-          <img
-            src="src/static/the-settler-title-art.png"
-            height="50"
-            width="220"
-            alt="The Settler" />
-        </picture>
-      </a>
-      <ul>
-        <li>
-          <a href="/issues"> issues </a>
-        </li>
-        <li>
-          <a href="/about"> about </a>
-        </li>
-        <li>
-          <a href="/archive"> archive </a>
-        </li>
-      </ul>
-    </nav>
-  </header>
+  <body>
+    <header>
+      <nav>
+        <a href="/">
+          <picture>
+            <source srcset="src/static/the-settler-title-art.webp" />
+            <img
+              src="src/static/the-settler-title-art.png"
+              height="50"
+              width="220"
+              alt="The Settler" />
+          </picture>
+        </a>
+        <ul>
+          <% navLinks.forEach(({ href, text, active }) => { %>
+          <li>
+            <a href="<%= href %>" class="<%= active ? 'active' : '' %>"
+              ><%= text %></a
+            >
+          </li>
+          <% }); %>
+        </ul>
+      </nav>
+    </header>
+  </body>
 </html>

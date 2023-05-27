@@ -22,6 +22,10 @@ html {
 body {
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 img,
@@ -88,8 +92,14 @@ nav a {
   text-decoration: none;
 }
 
-nav ul li:hover {
+nav a:hover:not(.active),
+nav a:hover:not(.focus) {
   cursor: pointer;
+  border-bottom: 1px solid;
+  margin-bottom: -1px;
+}
+
+.active {
   border-bottom: 1px solid;
   margin-bottom: -1px;
 }
@@ -130,6 +140,12 @@ main h1 {
   width: fit-content;
 }
 
+.pages {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
 .controls {
   display: flex;
   justify-content: space-between;
@@ -142,10 +158,33 @@ main h1 {
   gap: 32px;
 }
 
+main:has(.description) {
+  height: 100%;
+}
+
+.description {
+  font-family: Avenir;
+  font-size: 1.5rem;
+  margin: 32px 64px;
+}
+
+.issues-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin: 32px 64px;
+}
+
 @media (max-width: 768px) {
   main h1 {
     font-size: 2rem;
     margin: 48px auto 24px auto;
+  }
+
+  .description {
+    font-family: Avenir;
+    font-size: 1rem;
+    margin: 32px;
   }
 }
 
@@ -156,7 +195,6 @@ footer ul {
   justify-content: space-evenly;
   padding: 32px 0;
   font-family: Avenir;
-  /* scale font-size with screen */
   font-size: calc(0.5rem + 1vw);
 }
 

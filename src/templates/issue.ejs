@@ -1,8 +1,10 @@
 <%- include('_header', { preloads: [{ href: pages[0].image.placeholder, as:
-"image" }]}) %>
+"image" }, { href: pages[0].image.src, as: "image", imagesrcset:
+pages[0].image.srcset, }], prefetches: null }) %>
+<script src="src/static/index.js" defer></script>
 <main>
   <h1>Issue <%= number %></h1>
-  <section>
+  <section class="pages">
     <!--  -->
     <% pages.forEach(({ image, title }) => { %>
     <picture>
