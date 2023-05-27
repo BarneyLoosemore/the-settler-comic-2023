@@ -24,6 +24,13 @@
     <% if (prefetches) { %> <% prefetches.forEach(({ href, as }) => { %>
     <link href="<%= href %>" rel="prefetch" as="<%= as %>" />
     <% }); } %>
+    <script type="module">
+      if ("serviceWorker" in navigator) {
+        window.addEventListener("load", () => {
+          navigator.serviceWorker.register("/sw.js");
+        });
+      }
+    </script>
   </head>
   <body>
     <header>

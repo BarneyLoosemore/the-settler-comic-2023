@@ -1,3 +1,5 @@
+/** Scroll stuff  */
+// TODO: web componententise this
 const images = Array.from(document.querySelectorAll("main img"));
 const pageNumber = document.querySelector(".page-number");
 let activeImage = 0;

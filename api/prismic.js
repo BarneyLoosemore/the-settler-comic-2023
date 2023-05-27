@@ -42,10 +42,10 @@ const issues = uniqIssues.map((issue) => {
   };
 });
 
-// TODO: generalise this for SW?
-const urlsToCache = issues.flatMap(({ pages }) =>
-  pages.flatMap(({ image }) => [image.placeholder, ...image.srcset.split(",")])
-);
+const urlsForSwCache = issues.flatMap(({ pages }) => {
+  const { image } = pages[0];
+  return [image.placeholder, ...image.srcset.split(",")];
+});
 
 const aboutPageDescription = aboutData.map(({ content }) => ({
   description: prismicH.asText(content),
@@ -53,4 +53,4 @@ const aboutPageDescription = aboutData.map(({ content }) => ({
 
 const issueCovers = issueData.map(formatIssueCover).sort(sortAsc);
 
-export { issues, aboutPageDescription, issueCovers, urlsToCache };
+export { issues, aboutPageDescription, issueCovers, urlsForSwCache };
