@@ -6,7 +6,6 @@
     <title><%= pageTitle %> | The Settler</title>
 
     <link rel="icon" href="src/static/favicon.ico" />
-    <link href="src/static/index.css" rel="stylesheet" />
 
     <% if (preloads) { %> <% preloads.forEach(({ href, as, imagesrcset }) => {
     %>
@@ -26,25 +25,149 @@
     <% if (prefetches) { %> <% prefetches.forEach(({ href, as }) => { %>
     <link href="<%= href %>" rel="prefetch" as="<%= as %>" />
     <% }); } %>
-    <script type="module">
-      window.addEventListener("load", () => {
-        if ("serviceWorker" in navigator) {
-          navigator.serviceWorker.register("/sw.js");
+    <style type="text/css">
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+
+      * {
+        margin: 0;
+      }
+
+      html,
+      body {
+        height: 100%;
+      }
+
+      html {
+        overflow: scroll;
+      }
+
+      body {
+        line-height: 1.5;
+        -webkit-font-smoothing: antialiased;
+        min-height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+
+      img,
+      picture,
+      video,
+      canvas,
+      svg {
+        display: block;
+        max-width: 100%;
+      }
+
+      p,
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        overflow-wrap: break-word;
+      }
+
+      ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      h1 {
+        font-family: Avenir;
+        font-size: 3rem;
+        font-weight: bold;
+        border-bottom: 1px solid;
+        letter-spacing: -1px;
+        margin: 32px auto;
+        width: fit-content;
+      }
+
+      /* Header */
+
+      nav {
+        display: flex;
+        justify-content: space-between;
+        margin: 0 72px;
+        padding: 8px;
+      }
+
+      nav img {
+        height: 50px;
+        min-width: fit-content;
+        padding: 6px;
+        filter: invert(1);
+      }
+
+      nav a :has(img:hover, img:focus) {
+        border-bottom: 1px solid black;
+        margin-bottom: -1px;
+      }
+
+      nav ul {
+        display: flex;
+        align-items: center;
+        gap: 64px;
+      }
+
+      nav ul li {
+        font-family: Avenir;
+        font-size: 1.5rem;
+        letter-spacing: 0.1ch;
+        height: fit-content;
+      }
+
+      nav a {
+        color: black;
+        text-decoration: none;
+      }
+
+      nav a:hover:not(.active),
+      nav a:hover:not(.focus) {
+        cursor: pointer;
+        border-bottom: 1px solid;
+        margin-bottom: -1px;
+      }
+
+      .active {
+        border-bottom: 1px solid;
+        margin-bottom: -1px;
+      }
+
+      @media (max-width: 768px) {
+        nav {
+          margin: 16px 32px;
+          flex-direction: column;
+          align-items: center;
+          gap: 8px;
+          padding: 0;
         }
-      });
-    </script>
+        nav ul {
+          gap: 0px;
+          width: 100%;
+          justify-content: space-between;
+        }
+      }
+    </style>
+    <link rel="stylesheet" href="src/static/css/<%= stylesheet %>" />
   </head>
   <body>
     <header>
       <nav>
         <a href="/">
           <picture>
-            <source srcset="src/static/the-settler-title-art.webp" />
+            <source srcset="src/static/images/the-settler-title-art.webp" />
             <img
-              src="src/static/the-settler-title-art.png"
-              height="50"
-              width="220"
+              src="src/static/images/the-settler-title-art.png"
               fetchpriority="high"
+              width="166"
+              height="38"
               alt="The Settler" />
           </picture>
         </a>

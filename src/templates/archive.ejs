@@ -1,4 +1,4 @@
-<%- include('_header', { preloads: null, prefetches: null }) %>
+<%- include('_header', { preloads: null, prefetches: null, stylesheet }) %>
 <main>
   <ul>
     <% for (const issue of issues) { %> <% for (const page of issue.pages) { %>
@@ -10,3 +10,4 @@
     <% } %> <% } %>
   </ul>
 </main>
+<%- include('_footer') %>

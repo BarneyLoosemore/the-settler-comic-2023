@@ -1,7 +1,4 @@
-<%- include('_header', { preloads: [{ href: pages[0].image.placeholder, as:
-"image" }, { href: pages[0].image.src, as: "image", imagesrcset:
-pages[0].image.srcset, }], prefetches: null }) %>
-<script src="src/static/index.js" defer></script>
+<%- include('_header', { preloads, prefetches: null, stylesheet }) %>
 <main>
   <h1>Issue <%= number %></h1>
   <section class="pages">
@@ -28,4 +25,5 @@ pages[0].image.srcset, }], prefetches: null }) %>
     <button class="next">Next</button>
   </div>
 </main>
+<script src="src/static/js/issue.js" defer></script>
 <%- include('_footer') %>
