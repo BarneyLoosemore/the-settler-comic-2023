@@ -7,7 +7,7 @@ const getImageOrientation = (image) => {
 
 const getImageSrcSet = (image) =>
   prismicH.asImageWidthSrcSet(image, {
-    widths: [300, 600, 900],
+    widths: [300, 600, 1200],
     fm: "webp",
   });
 
@@ -23,17 +23,23 @@ const getPageNumber = (title) => {
   return Number(matches[matches.length - 1]);
 };
 
-export const formatPage = ({ page_title, page_content }) => ({
-  title: prismicH.asText(page_title),
-  number: getPageNumber(prismicH.asText(page_title)),
-  image: {
-    ...getImageSrcSet(page_content),
-    placeholder: getPlaceholderImage(page_content),
-    orientation: getImageOrientation(page_content),
-    height: page_content.dimensions.height,
-    width: page_content.dimensions.width,
-  },
-});
+export const formatPage = ({ page_title, page_content }, i) => {
+  const pageNumber = getPageNumber(prismicH.asText(page_title));
+  const isLCPImage = pageNumber === 1;
+  return {
+    title: prismicH.asText(page_title),
+    number: pageNumber,
+    image: {
+      ...getImageSrcSet(page_content),
+      placeholder: getPlaceholderImage(page_content),
+      orientation: getImageOrientation(page_content),
+      height: page_content.dimensions.height,
+      width: page_content.dimensions.width,
+      loading: isLCPImage ? "eager" : "lazy",
+      fetchpriority: isLCPImage ? "high" : "low",
+    },
+  };
+};
 
 export const filterByIssue = (issue) => (doc) =>
   prismicH.asText(doc.issue_number) === issue;

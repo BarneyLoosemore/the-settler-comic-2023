@@ -16,15 +16,16 @@ pages[0].image.srcset, }], prefetches: null }) %>
         loading="<%= image.loading %>"
         height="<%= image.height %>"
         width="<%= image.width %>"
+        fetchpriority="<%= image.fetchpriority %>"
         onload="this.style.backgroundImage = 'none';"
         style="background-image: url('<%= image.placeholder %>')" />
     </picture>
     <% }); %>
   </section>
   <div class="controls">
-    <p class="prev">Prev</p>
+    <button class="prev">Prev</button>
     <p class="page-number">0</p>
-    <p class="next">Next</p>
+    <button class="next">Next</button>
   </div>
 </main>
 <%- include('_footer') %>

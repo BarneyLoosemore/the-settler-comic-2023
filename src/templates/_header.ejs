@@ -4,6 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><%= pageTitle %> | The Settler</title>
+
+    <link rel="icon" href="src/static/favicon.ico" />
     <link href="src/static/index.css" rel="stylesheet" />
 
     <% if (preloads) { %> <% preloads.forEach(({ href, as, imagesrcset }) => {
@@ -25,11 +27,11 @@
     <link href="<%= href %>" rel="prefetch" as="<%= as %>" />
     <% }); } %>
     <script type="module">
-      if ("serviceWorker" in navigator) {
-        window.addEventListener("load", () => {
+      window.addEventListener("load", () => {
+        if ("serviceWorker" in navigator) {
           navigator.serviceWorker.register("/sw.js");
-        });
-      }
+        }
+      });
     </script>
   </head>
   <body>
@@ -42,6 +44,7 @@
               src="src/static/the-settler-title-art.png"
               height="50"
               width="220"
+              fetchpriority="high"
               alt="The Settler" />
           </picture>
         </a>
