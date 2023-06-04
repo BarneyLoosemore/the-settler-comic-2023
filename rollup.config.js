@@ -4,7 +4,6 @@ import { posix } from "path";
 import { createHash } from "crypto";
 
 export default {
-  // input: "src/static/index.js",
   output: {
     dir: "build",
   },
