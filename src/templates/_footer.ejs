@@ -29,5 +29,11 @@
       <% }); %>
     </ul>
   </footer>
-  <script src="src/static/js/load-sw.js" defer></script>
+  <script defer>
+    window.addEventListener("load", () => {
+      if ("serviceWorker" in navigator) {
+        navigator.serviceWorker.register("/sw.js");
+      }
+    })
+  </script>
 </html>
