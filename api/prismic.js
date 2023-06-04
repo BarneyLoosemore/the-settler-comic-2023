@@ -1,7 +1,6 @@
 import fetch from "node-fetch";
 import * as prismic from "@prismicio/client";
 import * as prismicH from "@prismicio/helpers";
-import { getColor, getPalette } from "colorthief";
 import {
   filterByIssue,
   formatPage,

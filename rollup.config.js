@@ -1,4 +1,5 @@
 import templateHtmlPlugin from "./lib/template-html-plugin.js";
+import terser from "@rollup/plugin-terser";
 import { urlsForSwCache } from "./api/prismic.js";
 import { posix } from "path";
 import { createHash } from "crypto";
@@ -50,5 +51,6 @@ export default {
           swChunk.code;
       },
     },
+    terser(),
   ],
 };
