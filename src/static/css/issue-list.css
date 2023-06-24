@@ -1,6 +1,25 @@
 .issues-list {
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  margin: 32px 64px;
+  gap: 1rem;
+  margin: 2rem 0;
+}
+
+@media (min-width: 768px) {
+  .issues-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    margin: 3rem 10rem;
+    gap: 2rem;
+  }
+}
+
+img {
+  height: 100%;
+}
+
+a:hover {
+  opacity: 0.8;
+  will-change: opacity;
+  transition: opacity 0.2s ease-in-out;
 }

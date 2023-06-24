@@ -1,0 +1,17 @@
+.page-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 32px 0;
+}
+
+.page-list li {
+  padding: 2rem;
+  font-family: Avenir;
+  border-bottom: 1px solid black;
+}
+
+.page-list a {
+  text-decoration: none;
+  color: black;
+}

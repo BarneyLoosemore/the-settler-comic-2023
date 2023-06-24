@@ -57,7 +57,7 @@ h1 {
   font-weight: bold;
   border-bottom: 1px solid;
   letter-spacing: -1px;
-  margin: 32px auto;
+  margin: 2rem auto;
   width: fit-content;
 }
 
@@ -66,42 +66,34 @@ h1 {
 nav {
   display: flex;
   justify-content: space-between;
-  margin: 0 72px;
-  padding: 8px;
+  margin: 1rem 5rem;
 }
 
 nav img {
   height: 50px;
   min-width: fit-content;
-  padding: 6px;
   filter: invert(1);
-}
-
-nav a :has(img:hover, img:focus) {
-  border-bottom: 1px solid black;
-  margin-bottom: -1px;
+  width: 100%;
+  padding: 0.25rem 0;
 }
 
 nav ul {
   display: flex;
   align-items: center;
-  gap: 64px;
+  gap: 4rem;
 }
 
-nav ul li {
+.nav-link {
   font-family: Avenir;
   font-size: 1.5rem;
   letter-spacing: 0.1ch;
   height: fit-content;
-}
-
-nav a {
   color: black;
   text-decoration: none;
 }
 
-nav a:hover:not(.active),
-nav a:hover:not(.focus) {
+.nav-link:hover:not(.active),
+.nav-link:focus:not(.active) {
   cursor: pointer;
   border-bottom: 1px solid;
   margin-bottom: -1px;
@@ -114,14 +106,14 @@ nav a:hover:not(.focus) {
 
 @media (max-width: 768px) {
   nav {
-    margin: 16px 32px;
+    margin: 2rem 2rem 0 2rem;
     flex-direction: column;
     align-items: center;
-    gap: 8px;
+    gap: 1rem;
     padding: 0;
   }
   nav ul {
-    gap: 0px;
+    gap: 0rem;
     width: 100%;
     justify-content: space-between;
   }
