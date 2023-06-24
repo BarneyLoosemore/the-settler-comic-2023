@@ -35,6 +35,7 @@ const pageNumber = document.querySelector(".page-number");
 
 let activeImage = 0;
 
+const threshold = window.innerWidth > 768 ? 0.5 : 1;
 const imageObserver = new IntersectionObserver(
   (entries) => {
     entries.forEach((entry) => {
@@ -47,7 +48,7 @@ const imageObserver = new IntersectionObserver(
     });
   },
   {
-    threshold: 0.5,
+    threshold,
   }
 );
 
@@ -61,13 +62,13 @@ const prevButton = document.querySelector(".prev");
 nextButton.addEventListener("click", () => {
   const nextImage = images[activeImage + 1];
   if (nextImage) {
-    nextImage.scrollIntoView({ behavior: "smooth" });
+    nextImage.scrollIntoView({ behavior: "smooth", block: "center" });
   }
 });
 
 prevButton.addEventListener("click", () => {
   const prevImage = images[activeImage - 1];
   if (prevImage) {
-    prevImage.scrollIntoView({ behavior: "smooth" });
+    prevImage.scrollIntoView({ behavior: "smooth", block: "center" });
   }
 });

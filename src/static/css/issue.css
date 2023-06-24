@@ -16,7 +16,6 @@ main img {
 
 .controls {
   display: flex;
-  justify-content: space-between;
   position: fixed;
   bottom: 0;
   left: 50%;
@@ -24,12 +23,8 @@ main img {
   background: black;
   color: white;
   gap: 2rem;
-}
-
-.controls {
   border-radius: 2rem;
   margin-bottom: 1rem;
-  align-items: center;
 }
 
 .controls p {
@@ -39,10 +34,9 @@ main img {
 }
 
 .controls button {
-  padding: 0.5rem 1rem;
   border: none;
   background: none;
   color: white;
-  font-size: 1.5rem;
   cursor: pointer;
+  padding: 0;
 }

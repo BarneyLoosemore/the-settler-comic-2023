@@ -14,21 +14,9 @@ const pruneCache = () => {
   });
 };
 
-const enablePreload = async () => {
-  if ("navigationPreload" in self.registration) {
-    await self.registration.navigationPreload.enable();
-  }
-};
-
 const respondToFetch = async (event) => {
   const cached = await caches.match(event.request);
-  if (cached) {
-    return cached;
-  }
-  const response = await event.preloadResponse;
-  if (response) {
-    return response;
-  }
+  if (cached) return cached;
 
   return fetch(event.request);
 };
@@ -38,7 +26,7 @@ addEventListener("install", (event) => {
 });
 
 addEventListener("activate", (event) => {
-  event.waitUntil(Promise.all([pruneCache(), enablePreload()]));
+  event.waitUntil(pruneCache());
 });
 
 addEventListener("fetch", (event) => {
