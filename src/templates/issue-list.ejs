@@ -1,11 +1,33 @@
 <%- include('_header', { preloads: null, prefetches, inlineStyles }) %>
 <main>
   <ul class="issues-list">
-    <% issueCovers.forEach(({ title, cover, pathname }) => { %>
+    <% issueCovers.forEach(({ title, cover, pathname, uid }) => { %>
     <li>
       <% if(pathname) { %>
-      <a href="/<%= pathname %>"><%= title %></a>
-      <% } else { %> <%= title %> <% } %>
+      <a href="/<%= pathname %>">
+        <picture>
+          <source srcset="<%= cover.srcset %>" />
+          <img
+            src="<%= cover.src %>"
+            alt="<%= title %>"
+            height="<%= cover.height %>"
+            width="<%= cover.width %>"
+            onload="this.style.backgroundImage = 'none';"
+            style="background-image: url('<%= cover.placeholder %>')" />
+        </picture>
+      </a>
+      <% } else { %>
+      <picture>
+        <source srcset="<%= cover.srcset %>" />
+        <img
+          src="<%= cover.src %>"
+          alt="<%= title %>"
+          height="<%= cover.height %>"
+          width="<%= cover.width %>"
+          onload="this.style.backgroundImage = 'none';"
+          style="background-image: url('<%= cover.placeholder %>')" />
+      </picture>
+      <% } %>
     </li>
     <% }); %>
   </ul>

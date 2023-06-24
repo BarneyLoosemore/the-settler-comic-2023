@@ -1,7 +1,7 @@
 <%- include('_header', { preloads: null, prefetches: null, inlineStyles }) %>
 <main>
-  <p class="description"><%= description %></p>
-  <img
-    src="https://images.prismic.io/conorwebcomic/c2a3aa36-2adb-4a1e-9c39-de035c8b23a6_page+27+flat+1.jpg?auto=compress%2Cformat&fm=webp&width=600" />
+  <% for (const line of description) { %>
+  <p class="description"><%= line %></p>
+  <% } %>
 </main>
 <%- include('_footer') %>

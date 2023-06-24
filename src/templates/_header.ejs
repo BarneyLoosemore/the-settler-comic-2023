@@ -46,7 +46,7 @@
         <ul>
           <% navLinks.forEach(({ href, text, active }) => { %>
           <li>
-            <a href="<%= href %>" class="<%= active ? 'active' : '' %>"
+            <a href="<%= href %>" class="nav-link <%= active ? 'active' : '' %>"
               ><%= text %></a
             >
           </li>

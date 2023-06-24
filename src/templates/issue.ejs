@@ -1,13 +1,12 @@
 <%- include('_header', { preloads, prefetches: null, inlineStyles }) %>
 <main>
-  <h1>Issue <%= number %></h1>
   <section class="pages">
     <!--  -->
-    <% pages.forEach(({ image, title }) => { %>
+    <% pages.forEach(({ image, title, uid }) => { %>
     <picture>
       <source srcset="<%= image.srcset %>" />
       <img
-        id="<%= title %>"
+        id="<%= uid %>"
         src="<%= image.src %>"
         alt="<%= title %>"
         loading="<%= image.loading %>"
@@ -19,11 +18,6 @@
     </picture>
     <% }); %>
   </section>
-  <div class="controls">
-    <button class="prev">Prev</button>
-    <p class="page-number">0</p>
-    <button class="next">Next</button>
-  </div>
 </main>
 <script src="src/static/js/issue.js" defer></script>
 <%- include('_footer') %>

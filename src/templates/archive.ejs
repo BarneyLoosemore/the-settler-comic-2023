@@ -1,9 +1,9 @@
 <%- include('_header', { preloads: null, prefetches: null, inlineStyles }) %>
 <main>
-  <ul>
+  <ul class="page-list">
     <% for (const issue of issues) { %> <% for (const page of issue.pages) { %>
     <li>
-      <a href="/issue-<%= issue.number %>#<%= page.title %>">
+      <a href="/issue-<%= issue.number %>#<%= page.uid %>">
         <%= page.title %>
       </a>
     </li>
