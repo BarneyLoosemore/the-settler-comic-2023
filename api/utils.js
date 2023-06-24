@@ -29,6 +29,7 @@ export const formatPage = ({ page_title, page_content }, i) => {
   return {
     title: prismicH.asText(page_title),
     number: pageNumber,
+    uid: pageNumber,
     image: {
       ...getImageSrcSet(page_content),
       placeholder: getPlaceholderImage(page_content),
@@ -50,7 +51,12 @@ export const formatIssueCover = ({ issue_title, issue_cover }) => {
   const issueNumber = Number(title.match(/\d+/)[0]);
   const pathname = title.toLowerCase().replace(/\s/g, "-");
   return {
-    cover: issue_cover.url,
+    cover: {
+      ...getImageSrcSet(issue_cover),
+      placeholder: getPlaceholderImage(issue_cover),
+      height: issue_cover.dimensions.height,
+      width: issue_cover.dimensions.width,
+    },
     title,
     number: issueNumber,
     pathname: issueNumber > LATEST_ISSUE ? null : pathname,
