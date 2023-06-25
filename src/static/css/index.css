@@ -6,15 +6,12 @@
 
 * {
   margin: 0;
+  scrollbar-color: auto;
 }
 
 html,
 body {
   height: 100%;
-}
-
-html {
-  overflow: scroll;
 }
 
 body {

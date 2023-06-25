@@ -33,9 +33,9 @@ document.body.insertAdjacentHTML("beforeend", controls);
 const images = Array.from(document.querySelectorAll("main img"));
 const pageNumber = document.querySelector(".page-number");
 
-let activeImage = 0;
+let activeImage = 1;
 
-const threshold = window.innerWidth > 768 ? 0.5 : 1;
+const threshold = window.innerWidth > 768 ? 0.5 : 0.8;
 const imageObserver = new IntersectionObserver(
   (entries) => {
     entries.forEach((entry) => {
