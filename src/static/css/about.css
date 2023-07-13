@@ -4,6 +4,10 @@
   color: white;
 }
 
+html {
+  overflow-y: scroll;
+}
+
 main {
   display: flex;
   flex-direction: column;

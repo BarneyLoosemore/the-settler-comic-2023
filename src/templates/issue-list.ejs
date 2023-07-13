@@ -1,4 +1,4 @@
-<%- include('_header', { preloads: null, prefetches, inlineStyles }) %>
+<%- include('_header', { preloads, prefetches, inlineStyles }) %>
 <main>
   <ul class="issues-list">
     <% issueCovers.forEach(({ title, cover, pathname, uid }) => { %>
@@ -24,6 +24,7 @@
           alt="<%= title %>"
           height="<%= cover.height %>"
           width="<%= cover.width %>"
+          loading="lazy"
           onload="this.style.backgroundImage = 'none';"
           style="background-image: url('<%= cover.placeholder %>')" />
       </picture>
