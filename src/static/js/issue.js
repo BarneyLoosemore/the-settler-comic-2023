@@ -59,16 +59,23 @@ images.forEach((img) => {
 const nextButton = document.querySelector(".next");
 const prevButton = document.querySelector(".prev");
 
+const scrollElementIntoView = (element) => {
+  const behavior = window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    ? "auto"
+    : "smooth";
+  element.scrollIntoView({ behavior, block: "center" });
+};
+
 nextButton.addEventListener("click", () => {
   const nextImage = images[activeImage + 1];
   if (nextImage) {
-    nextImage.scrollIntoView({ behavior: "smooth", block: "center" });
+    scrollElementIntoView(nextImage);
   }
 });
 
 prevButton.addEventListener("click", () => {
   const prevImage = images[activeImage - 1];
   if (prevImage) {
-    prevImage.scrollIntoView({ behavior: "smooth", block: "center" });
+    scrollElementIntoView(prevImage);
   }
 });
